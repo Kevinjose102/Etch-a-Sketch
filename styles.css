@@ -5,18 +5,11 @@ body{
     justify-content: center;
 }
 .container{
-    height: 960px; 
-    width: 960px;
+    height: 500px; 
+    width: 500px;
     display: flex;
     flex-wrap: wrap;
     border: 2px solid black;
-    padding: 0;
-    margin: 0;
-}
-
-.container div{
-    height: 60px;
-    width: 60px;
     padding: 0;
     margin: 0;
 }
