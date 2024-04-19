@@ -2,75 +2,60 @@ const container = document.querySelector(".container");
 const gridButton = document.querySelector(".grid-size")
 const clearButton = document.querySelector(".clear");
 
+let dimenstionString ="";
+let grids;
 
-let heightString = "31.25px";
-let widthString = "31.25px";
-
-//creating the default grid 16x16
-for(let i = 1; i <= 256; i++){
-    const gridBox = document.createElement("div");
-    gridBox.classList.add("grid")
-    gridBox.setAttribute("style","height: 31.25px; \
-                                width: 31.25px; \
-                                padding: 0; \
-                                margin: 0;");
-    container.appendChild(gridBox);
-}
-
-
-const grids = document.querySelectorAll(".grid")
-
-//creating the grid using the prompt of the user
+//fucntion to make the grid of a given size
 function makeGrid(size){
-    let height = 500/size;
-    let width = 500/size;
+    
+    let height = 500 / size;
 
-    let heightString = height.toString() + "px";
-    let widthString = width.toString() +"px";
-
-    console.log(heightString);
-
-    for(let i = 1; i <= size**2; i++){
-        grids.forEach(gridBox => {
-            gridBox.setAttribute("style","height: " + heightString +";" +
-                                        "width: " + widthString + ";" +
-                                        "padding: 0; \
-                                        margin: 0;");
-        })
+    dimenstionString = height.toString(); 
+    for(let i = 1; i <= size * size; i++){
+        const gridBox = document.createElement("div");
+        gridBox.classList.add("grid");
+        gridBox.setAttribute("style","height:" + dimenstionString + "px; \
+                                    width: " + dimenstionString + "px; \
+                                    padding: 0; \
+                                    margin: 0;");
+        container.appendChild(gridBox);
     }
+    grids = document.querySelectorAll(".grid");
 }
 
-//hover effect 
+makeGrid(30);
+
+function changeColor(grid){
+    grid.setAttribute("style","height:" + dimenstionString + "px; \
+                                width: " + dimenstionString + "px; \
+                                padding: 0; \
+                                margin: 0; \
+                                background-color : black");
+}
+
+
 grids.forEach(grid => {
     grid.addEventListener("mouseover", () => {
-        grid.setAttribute("style","height: " + heightString +";" +
-                                    "width: " + widthString + ";" +
-                                    "padding: 0; \
-                                    margin: 0; \
-                                    background-color : black;");
+        changeColor(grid);
+        console.log("hi");
     })
-});
+})
 
-
-//taking the grid size as an input
-gridButton.addEventListener("click", () => {
-    let gridSize = prompt("Enter the grid size");
+//clears the grid and makes the default 16x16 grid
+clearButton.addEventListener("click", () => {
     clear();
-    makeGrid(gridSize);
-});
+    makeGrid(30);
+})
 
-
-
-//clearing the grid
+//clears the grid 
 function clear(){
     grids.forEach(grid => {
-        grid.setAttribute("style","height: 31.25px; \
-                                    width: 31.25px; \
-                                    padding: 0; \
-                                    margin: 0;\
-                                    background-color: white") 
-    })
+        container.removeChild(grid);
+    });
 }
 
-clearButton.addEventListener("click", () => clear())
-
+gridButton.addEventListener("click", () => {
+    clear();
+    let size = prompt("Enter the size of the grid: ");
+    makeGrid(size);
+})
