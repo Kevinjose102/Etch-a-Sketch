@@ -3,8 +3,7 @@ const gridButton = document.querySelector(".grid-size")
 const clearButton = document.querySelector(".clear");
 
 let dimenstionString ="";
-let grids;
-
+let size = 30;
 //fucntion to make the grid of a given size
 function makeGrid(size){
     
@@ -19,43 +18,52 @@ function makeGrid(size){
                                     padding: 0; \
                                     margin: 0;");
         container.appendChild(gridBox);
+
+        gridBox.addEventListener("mouseover", changeColor);
+        gridBox.addEventListener("mousedown", changeColor);
+
     }
-    grids = document.querySelectorAll(".grid");
 }
 
+//for the drag effect
+let mouseDown = false
+document.body.onmousedown = () => (mouseDown = true)
+document.body.onmouseup = () => (mouseDown = false)
+
+//creates the default grid
 makeGrid(30);
 
-function changeColor(grid){
-    grid.setAttribute("style","height:" + dimenstionString + "px; \
-                                width: " + dimenstionString + "px; \
-                                padding: 0; \
-                                margin: 0; \
-                                background-color : black");
+//changes the color of the grid element when the mouse is down and dragged over
+function changeColor(e){
+    //mouse is down and it is hovering
+    if (e.type === 'mouseover' && !mouseDown) return
+    else{
+        e.target.style.backgroundColor = "black";
+    }
 }
-
-
-grids.forEach(grid => {
-    grid.addEventListener("mouseover", () => {
-        changeColor(grid);
-        console.log("hi");
-    })
-})
 
 //clears the grid and makes the default 16x16 grid
 clearButton.addEventListener("click", () => {
     clear();
-    makeGrid(30);
+    makeGrid(size);
 })
 
 //clears the grid 
 function clear(){
+    const grids = document.querySelectorAll(".grid");
     grids.forEach(grid => {
         container.removeChild(grid);
     });
 }
 
+//changing the grid size according to the user
 gridButton.addEventListener("click", () => {
-    clear();
-    let size = prompt("Enter the size of the grid: ");
-    makeGrid(size);
+    size = prompt("Enter the size of the grid: ");
+    if(size){
+        clear();
+        makeGrid(size);
+    }
+    else{
+        size = 30;
+    }
 })
