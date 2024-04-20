@@ -10,27 +10,43 @@
     </head>
 
     <body>
-        <div class="container"></div>
+        <h1 class="heading">
+            Etch-a-Sketch
+        </h1>
+        <div class="content">
+            <div class="options">
+                <input id="color-picker" type="color" value="#333333"/>
         
-        <div class="options">
-            <button class="grid-size">
-                Grid
-            </button>
-            <button class="clear">
-                Clear
-            </button>
-            
-            <input id="color-picker" type="color" value="#333333"/>
+                <button class="color-mode">
+                    Color Mode
+                </button>
+                <button class="rainbow-mode">
+                    Rainbow Mode
+                </button>
+                <button class="eraser">
+                    Eraser
+                </button>
     
-            <button class="color-mode">
-                Color Mode
-            </button>
-            <button class="rainbow-mode">
-                Rainbow Mode
-            </button>
-            <button class="eraser">
-                Eraser
-            </button>
+                <button class="clear">
+                    Clear
+                </button>
+                
+            </div>
+    
+            <div class="boxmodel">
+                <div class="container"></div>
+                
+                <div class="range">
+                    <input id="sizeSlider" type="range" value="30" min="1" max="64" />
+                </div>
+    
+                <div class="grid-size-display">
+                    30 x 30
+                </div>
+            </div>
         </div>
+        <footer>
+            <a target="_blank" href="https://github.com/Kevinjose102">Copyright © 2024 Kevinjose102</a>
+        </footer>
     </body>
 </html>

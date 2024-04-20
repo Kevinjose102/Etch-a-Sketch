@@ -1,9 +1,10 @@
 const container = document.querySelector(".container");
-const gridButton = document.querySelector(".grid-size")
+const sizeSlider = document.getElementById("sizeSlider")
 const clearButton = document.querySelector(".clear");
 const colorModeButton = document.querySelector(".color-mode");
 const rainbowModeButton = document.querySelector(".rainbow-mode");
 const eraserButton = document.querySelector(".eraser");
+const sizeValue = document.querySelector(".grid-size-display")
 
 let DEFAULT_COLOR = "#333333";
 let DEFAULT_SIZE = 30;
@@ -24,7 +25,8 @@ function makeGrid(size){
         gridBox.setAttribute("style","height:" + dimenstionString + "px; \
                                     width: " + dimenstionString + "px; \
                                     padding: 0; \
-                                    margin: 0;");
+                                    margin: 0;\
+                                    background-color: white");
         container.appendChild(gridBox);
 
         gridBox.addEventListener("mouseover", changeColor);
@@ -42,7 +44,6 @@ makeGrid(DEFAULT_SIZE);
 
 //changes the color of the grid element when the mouse is down and dragged over
 function changeColor(e){
-    console.log(currentMode)
     //mouse is down and it is hovering
     if (e.type === 'mouseover' && !mouseDown) return
     if(currentMode === "color-mode"){
@@ -74,17 +75,20 @@ function clear(){
     });
 }
 
+
 //changing the grid size according to the user
-gridButton.addEventListener("click", () => {
-    size = prompt("Enter the size of the grid: ");
-    if(size){
-        clear();
-        makeGrid(size);
-    }
-    else{
-        size = DEFAULT_SIZE;
-    }
-})
+sizeSlider.onmousemove = (e) => updateSizeValue(e.target.value)
+sizeSlider.onchange = (e) => changeSize(e.target.value);
+
+function updateSizeValue(value){
+    sizeValue.innerHTML = `${value} x ${value}`;
+}
+
+function changeSize(value){
+    clear();
+    makeGrid(value)
+}
+
 
 //DIFFERENT MODES
 colorModeButton.addEventListener("click", () => {
