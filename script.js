@@ -48,7 +48,7 @@ function makeGrid(size){
                                     background-color: white");
         container.appendChild(gridBox);
 
-        gridBox.addEventListener("mouseover", changeColor);
+        gridBox.addEventListener("mousemove", changeColor);
         gridBox.addEventListener("mousedown", changeColor);
     }
 }
@@ -59,7 +59,7 @@ makeGrid(DEFAULT_SIZE);
 //changes the color of the grid element when the mouse is down and dragged over
 function changeColor(e){
     //mouse is down and it is hovering
-    if (e.type === 'mouseover' && !mouseDown) return
+    if (e.type === 'mousemove' && !mouseDown) return
     if(currentMode == "color-mode"){
         currentColor = document.getElementById("color-picker").value
         e.target.style.backgroundColor = currentColor;
