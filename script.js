@@ -13,6 +13,25 @@ let currentColor = DEFAULT_COLOR;
 let dimenstionString ="";
 let size = DEFAULT_SIZE;
 
+//for the drag effect
+let mouseDown = false
+document.body.onmousedown = () => (mouseDown = true)
+document.body.onmouseup = () => (mouseDown = false)
+
+//changing the grid size according to the user
+sizeSlider.onmousemove = (e) => updateSizeValue(e.target.value)
+sizeSlider.onchange = (e) => changeSize(e.target.value);
+
+function updateSizeValue(value){
+    sizeValue.innerHTML = `${value} x ${value}`;
+}
+
+function changeSize(value){
+    clear();
+    makeGrid(value)
+    size = value;
+}
+
 //fucntion to make the grid of a given size
 function makeGrid(size){
     
@@ -34,11 +53,6 @@ function makeGrid(size){
     }
 }
 
-//for the drag effect
-let mouseDown = false
-document.body.onmousedown = () => (mouseDown = true)
-document.body.onmouseup = () => (mouseDown = false)
-
 //creates the default grid
 makeGrid(DEFAULT_SIZE);
 
@@ -46,17 +60,17 @@ makeGrid(DEFAULT_SIZE);
 function changeColor(e){
     //mouse is down and it is hovering
     if (e.type === 'mouseover' && !mouseDown) return
-    if(currentMode === "color-mode"){
+    if(currentMode == "color-mode"){
         currentColor = document.getElementById("color-picker").value
         e.target.style.backgroundColor = currentColor;
     }
-    if(currentMode === "rainbow-mode"){
+    else if(currentMode == "rainbow-mode"){
         const randomR = Math.floor(Math.random() * 256)
         const randomG = Math.floor(Math.random() * 256)
         const randomB = Math.floor(Math.random() * 256)
         e.target.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`
     }
-    if(currentMode === "eraser"){
+    else if(currentMode == "eraser"){
         e.target.style.backgroundColor = "white";
     }
 }
@@ -75,30 +89,21 @@ function clear(){
     });
 }
 
-
-//changing the grid size according to the user
-sizeSlider.onmousemove = (e) => updateSizeValue(e.target.value)
-sizeSlider.onchange = (e) => changeSize(e.target.value);
-
-function updateSizeValue(value){
-    sizeValue.innerHTML = `${value} x ${value}`;
-}
-
-function changeSize(value){
-    clear();
-    makeGrid(value)
-}
-
-
 //DIFFERENT MODES
 colorModeButton.addEventListener("click", () => {
+    document.querySelector(".button-active")?.classList.remove("button-active");
+    colorModeButton.classList.add("button-active");
     currentMode = "color-mode";
 })
 
 rainbowModeButton.addEventListener("click", () => {
+    document.querySelector(".button-active")?.classList.remove("button-active");
+    rainbowModeButton.classList.add("button-active")
     currentMode = "rainbow-mode";
 })
 
 eraserButton.addEventListener("click", () => {
+    document.querySelector(".button-active")?.classList.remove("button-active");
+    eraserButton.classList.add("button-active")
     currentMode = "eraser";
 })
