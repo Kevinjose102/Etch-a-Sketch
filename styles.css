@@ -1,6 +1,8 @@
 html{
     height: 100vh;
     width: 100vw;
+    padding: 0;
+    margin: 0;
 }
 
 body{
@@ -11,6 +13,8 @@ body{
     flex-direction: column;
     gap: 30px;
     background-color: rgb(233, 233, 233);
+    padding: 0;
+    margin: 0;
 }
 
 h1{
