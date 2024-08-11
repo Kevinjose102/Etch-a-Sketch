@@ -15,8 +15,8 @@ let size = DEFAULT_SIZE;
 
 //for the drag effect
 let mouseDown = false
-document.body.onmousedown = () => (mouseDown = true)
-document.body.onmouseup = () => (mouseDown = false)
+container.onmousedown = () => (mouseDown = true)
+container.onmouseup = () => (mouseDown = false)
 
 //changing the grid size according to the user
 sizeSlider.onmousemove = (e) => updateSizeValue(e.target.value)
@@ -35,7 +35,7 @@ function changeSize(value){
 //fucntion to make the grid of a given size
 function makeGrid(size){
     
-    let height = 500 / size;
+    let height = 700 / size;
 
     dimenstionString = height.toString(); 
     for(let i = 1; i <= size * size; i++){
