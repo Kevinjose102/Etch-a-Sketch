@@ -1,6 +1,7 @@
 const container = document.querySelector(".container");
 const sizeSlider = document.getElementById("sizeSlider")
 const clearButton = document.querySelector(".clear");
+const darkenButton = document.querySelector(".darken");
 const colorModeButton = document.querySelector(".color-mode");
 const rainbowModeButton = document.querySelector(".rainbow-mode");
 const eraserButton = document.querySelector(".eraser");
@@ -8,10 +9,12 @@ const sizeValue = document.querySelector(".grid-size-display")
 
 let DEFAULT_COLOR = "#333333";
 let DEFAULT_SIZE = 30;
-let currentMode = "color-mode";
+let currentMode;
 let currentColor = DEFAULT_COLOR;
 let dimenstionString ="";
 let size = DEFAULT_SIZE;
+let count = 0;
+let darkOpacity = 0;
 
 //for the drag effect
 let mouseDown = false
@@ -73,6 +76,15 @@ function changeColor(e){
     else if(currentMode == "eraser"){
         e.target.style.backgroundColor = "white";
     }
+    else if(currentMode == "darken"){
+        currentColor = document.getElementById("color-picker").value
+        e.target.style.backgroundColor = currentColor;
+        if(count < 10){
+            darkOpacity += 0.1;
+            count = count + 1
+            e.target.style.opacity = darkOpacity
+        }
+    }
 }
 
 //clears the grid and makes the default 16x16 grid
@@ -106,4 +118,12 @@ eraserButton.addEventListener("click", () => {
     document.querySelector(".button-active")?.classList.remove("button-active");
     eraserButton.classList.add("button-active")
     currentMode = "eraser";
+})
+
+darkenButton.addEventListener("click", () => {
+    document.querySelector(".button-active")?.classList.remove("button-active");
+    darkenButton.classList.add("button-active")
+    currentMode = "darken";
+    count = 0
+    darkOpacity = 0
 })

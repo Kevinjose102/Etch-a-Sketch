@@ -54,6 +54,7 @@ h1{
     gap: 10px;
 }
 
+
 .boxmodel{
     align-items: center;
     justify-content: center;
@@ -85,7 +86,7 @@ h1{
 }
 
 button{
-    height: 50px;
+    height: 70px;
     width: 180px;
     border: 2px solid rgb(207, 207, 207);
     border-radius: 10px;
@@ -105,7 +106,7 @@ button:active{
     box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.309);
 }
 #color-picker{
-    height: 50px;
+    height: 70px;
     width: 180px;    
     border: none;
     border-radius: 50px;
